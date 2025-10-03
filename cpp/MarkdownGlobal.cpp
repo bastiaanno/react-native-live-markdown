@@ -17,26 +17,26 @@ std::shared_ptr<WorkletRuntime> getMarkdownRuntime() {
   return globalMarkdownWorkletRuntime;
 }
 
-std::unordered_map<int, std::shared_ptr<ShareableWorklet>> globalMarkdownShareableWorklets;
-std::mutex globalMarkdownShareableWorkletsMutex;
+std::unordered_map<int, std::shared_ptr<SerializableWorklet>> globalMarkdownSerializableWorklets;
+std::mutex globalMarkdownSerializableWorkletsMutex;
 int nextParserId = 1;
 
-const int registerMarkdownWorklet(const std::shared_ptr<ShareableWorklet> &markdownWorklet) {
+const int registerMarkdownWorklet(const std::shared_ptr<SerializableWorklet> &markdownWorklet) {
   assert(markdownWorklet != nullptr);
   auto parserId = nextParserId++;
-  std::unique_lock<std::mutex> lock(globalMarkdownShareableWorkletsMutex);
-  globalMarkdownShareableWorklets[parserId] = markdownWorklet;
+  std::unique_lock<std::mutex> lock(globalMarkdownSerializableWorkletsMutex);
+  globalMarkdownSerializableWorklets[parserId] = markdownWorklet;
   return parserId;
 }
 
 void unregisterMarkdownWorklet(const int parserId) {
-  std::unique_lock<std::mutex> lock(globalMarkdownShareableWorkletsMutex);
-  globalMarkdownShareableWorklets.erase(parserId);
+  std::unique_lock<std::mutex> lock(globalMarkdownSerializableWorkletsMutex);
+  globalMarkdownSerializableWorklets.erase(parserId);
 }
 
-std::shared_ptr<ShareableWorklet> getMarkdownWorklet(const int parserId) {
-  std::unique_lock<std::mutex> lock(globalMarkdownShareableWorkletsMutex);
-  return globalMarkdownShareableWorklets.at(parserId);
+std::shared_ptr<SerializableWorklet> getMarkdownWorklet(const int parserId) {
+  std::unique_lock<std::mutex> lock(globalMarkdownSerializableWorkletsMutex);
+  return globalMarkdownSerializableWorklets.at(parserId);
 }
 
 } // namespace livemarkdown
