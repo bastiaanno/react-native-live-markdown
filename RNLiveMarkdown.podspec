@@ -22,10 +22,6 @@ Pod::Spec.new do |s|
 
   s.dependency "RNWorklets"
 
-  s.pod_target_xcconfig = {
-    'HEADER_SEARCH_PATHS' => '"$(PODS_ROOT)/Headers/Private/RNWorklets" "$(PODS_ROOT)/Headers/Public/RNWorklets"'
-  }
-  
   s.xcconfig = {
     "OTHER_CFLAGS" => "$(inherited) -DREACT_NATIVE_MINOR_VERSION=#{react_native_minor_version}",
   }
