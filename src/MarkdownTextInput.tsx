@@ -1,9 +1,8 @@
 import {StyleSheet, TextInput, processColor} from 'react-native';
 import React from 'react';
 import type {TextInputProps} from 'react-native';
-import {createWorkletRuntime, makeShareableCloneRecursive} from 'react-native-reanimated';
-import type {WorkletRuntime} from 'react-native-reanimated';
-import type {ShareableRef, WorkletFunction} from 'react-native-reanimated/lib/typescript/commonTypes';
+import {createWorkletRuntime, makeShareableCloneRecursive} from 'react-native-worklets';
+import type {WorkletRuntime, ShareableRef, WorkletFunction} from 'react-native-worklets';
 
 import MarkdownTextInputDecoratorViewNativeComponent from './MarkdownTextInputDecoratorViewNativeComponent';
 import type {MarkdownStyle} from './MarkdownTextInputDecoratorViewNativeComponent';
