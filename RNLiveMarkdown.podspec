@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
 
   s.source_files = "apple/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}"
 
-  s.dependency "RNReanimated/worklets"
+  s.dependency "RNWorklets"
 
   s.xcconfig = {
     "OTHER_CFLAGS" => "$(inherited) -DREACT_NATIVE_MINOR_VERSION=#{react_native_minor_version}",
